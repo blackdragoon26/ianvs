@@ -28,6 +28,12 @@ Completed checks:
   zero model calls, and a one-image mapping after one real model call. This
   confirms the two states can share an empty-prediction payload even when the
   model genuinely executes for the second state.
+- `robodk-real-inference.mp4` is a 15-second rendered evidence summary showing
+  the exact command boundary, the dataset image, and the observed control/result.
+  Its SHA-256 is
+  `6b8b695038285f6c0db9fd40532e4fb881e8c0fd57e5b65a03b33dc388a970ca`.
+  It is not represented as a live terminal screen recording; the runnable
+  script and raw observations remain the authoritative evidence.
 
 The full Ianvs train/evaluate benchmark remains unexecuted. Its committed YAML
 and dataset indexes contain `/root/ianvs/project/...` paths that do not match

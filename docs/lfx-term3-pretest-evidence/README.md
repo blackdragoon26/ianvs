@@ -40,6 +40,11 @@ python3 -m venv .venv
 See `pretest-resource-audit.md` for the dataset identity, checksum, runtime,
 completed real-model check, and remaining full-run constraints.
 
+The 15-second [`robodk-real-inference.mp4`](./robodk-real-inference.mp4)
+evidence summary shows the exact command boundary, the real dataset image, and
+the empty-input/one-image observations. It is a rendered summary, not a live
+terminal recording; the runnable script is the authoritative reproduction.
+
 ## Recorded heads
 
 | PR | Commit |
