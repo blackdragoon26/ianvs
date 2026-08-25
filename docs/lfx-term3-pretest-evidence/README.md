@@ -23,6 +23,23 @@ The Python environment needs NumPy for the RoboDK metric case. The runner
 retains its temporary worktrees and prints their location so the extracted
 source can be inspected after execution.
 
+The optional real-model follow-up requires Ultralytics and one exported
+RoboDK dataset image:
+
+```shell
+python3 -m venv .venv
+.venv/bin/pip install ultralytics
+
+.venv/bin/python \
+  docs/lfx-term3-pretest-evidence/robodk_real_inference_check.py \
+  --source /path/to/pr736/examples/RoboDK\ Palletizing/singletask_learning_bench/testalgorithms/basemodel.py \
+  --image /path/to/RoboDK_Palletizing_Dataset/images/test/snapshot_20250903_105659.png \
+  --model yolov8n.pt --device cpu
+```
+
+See `pretest-resource-audit.md` for the dataset identity, checksum, runtime,
+completed real-model check, and remaining full-run constraints.
+
 ## Recorded heads
 
 | PR | Commit |
@@ -37,9 +54,12 @@ source can be inspected after execution.
 ## Verification boundary
 
 The completed checks cover the exact boundary functions and include failing
-and passing controls. They do not claim full federated training, external
-LLM/VLM calls, model or metric downloads, complete datasets, GPU execution, or
-RoboDK hardware execution.
+and passing controls. The follow-up also downloaded the documented RoboDK
+dataset and public YOLOv8n weights and ran the exact PR #736 `predict` body on
+one real dataset image over CPU. It does not claim full federated training,
+external GovDoc LLM/VLM calls, or the 30-epoch Ianvs RoboDK train/evaluate
+workflow. The reviewed exported-image prediction boundary does not require the
+RoboDK simulator or physical hardware to be running.
 
 `pretest-contract-transcript.png` is a rendered image of the exact raw output
 from the SHA-verified run. It is provided for readable evidence and is not

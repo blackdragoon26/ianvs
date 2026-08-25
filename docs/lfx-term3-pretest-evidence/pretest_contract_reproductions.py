@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-light reproductions for the LFX Term 3 private review draft."""
+"""Dependency-light reproductions for the LFX Term 3 pre-test evidence bundle."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import ast
 import json
 import os
 from pathlib import Path
+import subprocess
 from threading import RLock
 from types import SimpleNamespace
 from typing import Any, Dict, Optional
@@ -120,10 +121,19 @@ def reproduce_pr705():
         {"rule_type": string_result["rule_type"], "summary": string_result["summary"]},
     )
 
-    changed = os.popen(
-        "git -C /tmp/ianvs-pretest.nwh5I4/pr705 diff --name-only "
-        "36ec0087c0919989ca305eb593c739bb1e97509d..HEAD"
-    ).read().splitlines()
+    changed = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(ROOT / "pr705"),
+            "diff",
+            "--name-only",
+            "36ec0087c0919989ca305eb593c739bb1e97509d..HEAD",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
     print("PR705 changes gov_planner.py:", any(name.endswith("gov_planner.py") for name in changed))
     print("PR705 changes gov_painter.py:", any(name.endswith("gov_painter.py") for name in changed))
 
